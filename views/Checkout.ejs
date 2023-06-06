@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Govan Bargains - Checkout</title>
+  <style>
+    /* CSS styles here */
+  </style>
+</head>
+<body>
+  <% include header %>
+  <a href="/cart" class="cart-button">Cart</a>
+
+  <h1>Checkout</h1>
+
+  <% if (cartItems.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cartItems.forEach(function(item) { %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.price %></td>
+            <td><%= item.quantity %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <p>Total: $<%= calculateTotal(cartItems) %></p>
+    <button class="checkout-button">Checkout</button>
+  <% } else { %>
+    <p>Your cart is empty.</p>
+  <% } %>
+
+  <% include footer %>
+  <script src="checkout.js"></script>
+</body>
+</html>

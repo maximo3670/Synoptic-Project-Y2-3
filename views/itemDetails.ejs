@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Govan Bargains</title>
+  <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      /* General */
+      body {
+        background-color: #3d5a80;
+        font-family: sans-serif;
+        margin: 0px;
+      }
+      
+      main {
+        margin: 36px;
+        text-align: center;
+      }
+      
+      h1 {
+        text-align: center;
+        font-size: 225%;
+        color: black;
+        margin-bottom: 36px;
+      }
+      
+      h2 {
+        text-align: center;
+        font-size: 190%;
+        margin-top: 48px;
+        margin-bottom: 24px;
+      }
+      
+      p {
+        text-align: center;
+        font-size: 165%;
+        font-family: sans-serif;
+        margin: 12px;
+      }
+      
+      a {
+        text-decoration: none;
+      }
+
+      button {
+        display: block;
+        border: 2px solid #000000;
+        margin: 50px auto;
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+        background-color: #98c1d9;
+        cursor: pointer;
+        color: black;
+        transition: transform 0.3s ease;
+    }
+    
+    button:hover {
+        transform: scale(1.1);
+    }
+      </style>
+</head>
+<body>
+  <%- include('header'); -%>
+  <main>
+    <div id="item-details"></div>
+    <div id="seller-details"></div>
+    <% if (isLoggedIn) { %>
+      <div id="add-to-cart"></div>
+     <% } %>
+    
+  </main>
+  <script src="itemDetails.js"></script>
+  <%- include('footer'); -%>
+</body>
+</html>

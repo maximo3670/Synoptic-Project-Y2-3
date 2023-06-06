@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Govan Bargains</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none
+    }
+
+    /* General styles */
+
+    /* Add the following styles for the cart button */
+    .cart-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #2980b9;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none; 
+    }
+
+    .cart-button:hover {
+      background-color: #1a5276;
+    }
+  </style>
+</head>
+<body>
+  <%- include('header') %>
+
+  <h1>Shopping Cart</h1>
+
+  <% if (cartItems.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <!-- Other columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <% cartItems.forEach(function(item) { %>
+          <tr>
+            <td><%= item.itemName %></td>
+            <td><%= item.itemPrice %></td>
+            <td><%= item.itemDescription %></td>
+            <!-- Other cells as needed -->
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>Your cart is empty.</p>
+  <% } %>
+
+  <%- include('footer') %>
+</body>
+</html>

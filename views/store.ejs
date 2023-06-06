@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Govan Bargains</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 225%;
+        color: black;
+        margin-bottom: 36px;
+    }
+    
+    h2 {
+        text-align: center;
+        font-size: 190%;
+        margin-top: 48px;
+        margin-bottom: 24px;
+    }
+    
+    p {
+        text-align: center;
+        font-size: 165%;
+        font-family: sans-serif;
+        margin: 12px;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+         
+    #item-table {
+        width: 80%;
+        margin: 50px auto;
+        background-color: white;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    
+    #item-table thead th {
+        background-color: lightgrey;
+        padding: 10px;
+        font-family: "Arial", sans-serif;
+        border: 1px solid black;
+    }
+    
+    #item-table tbody td {
+        padding: 10px;
+        font-family: "Arial", sans-serif;
+        border: 1px solid black;
+    }
+    
+    button {
+        display: block;
+        border: 2px solid #000000;
+        margin: 50px auto;
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+        background-color: #98c1d9;
+        cursor: pointer;
+        color: black;
+        transition: transform 0.3s ease;
+    }
+    
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .detailsButton {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+  
+    .detailsButton:hover {
+        background-color: #45a049;
+    }
+  
+    .detailsButton:active {
+        background-color: #3e8e41;
+    }
+  
+  </style>
+</head>
+<body>
+  <%- include('header'); -%>
+
+  <% if (isLoggedIn) { %>
+    <button onclick="redirectToPage()">List Item</button>
+  <% } %>
+    
+  <table id="item-table">
+    <thead>
+      <tr class="header">
+        <th id="itemName">Name</th>
+        <th id="itemPrice">Price</th>
+        <th id="itemDescription">Description</th>
+        <th id="viewDetails">View Details</th>
+      </tr>
+    </thead>
+    <tbody id="item-output">
+      
+    </tbody>
+  </table>
+  
+  <%- include('footer'); -%>
+  <script src="store.js"></script>
+  <script>
+    function redirectToPage() {
+      window.location.href = "/listItem";
+    }
+  </script>
+</body>
+</html>
