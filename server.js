@@ -30,13 +30,52 @@ app.use((req, res, next) => {
 });
 
 // Setting up the webpages and their URLs
-app.get('/', function(req, res) { res.render("index.ejs"); });
-app.get('/store', function(req, res) { res.render("store.ejs"); });
-app.get('/itemDetails', function(req, res) { res.render("itemDetails.ejs"); });
-app.get('/login', function(req, res) { res.render("login.ejs"); });
-app.get('/register', function(req, res) { res.render("register.ejs"); });
-app.get('/listItem', function(req, res) { res.render("listItem.ejs"); });
-app.get('/logout', function(req, res) { res.render("logout.ejs"); });
+app.get('/', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("index.ejs", { userId });
+});
+
+app.get('/store', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("store.ejs", { userId });
+});
+
+app.get('/itemDetails', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("itemDetails.ejs", { userId });
+});
+
+app.get('/login', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("login.ejs", { userId });
+});
+
+app.get('/register', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("register.ejs", { userId });
+});
+
+app.get('/listItem', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("listItem.ejs", { userId });
+});
+
+app.get('/logout', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("logout.ejs", { userId });
+});
+
+app.get('/admin', function(req, res) { 
+  const userId = req.session.userId;
+  res.render("admin.ejs", { userId });
+});
+
+app.get('/cart', function(req, res) {
+  const userId = req.session.userId;
+  const cartItems = req.session.cartItems || [];
+  res.render("cart.ejs", { cartItems, userId });
+});
+
 
 app.post('/login', (req, res) => {
   const { userId } = req.body;
@@ -45,12 +84,13 @@ app.post('/login', (req, res) => {
   req.session.isLoggedIn = true;
   req.session.cartItems = [];
 
+  console.log("User:" + userId + " logged in");
+
   res.status(200).json({ message: 'Session set successfully' });
 });
 
 app.post('/logout', (req, res) => {
   req.session.cartItems = [];
-
   // Clear the session or token
   req.session.destroy((err) => {
     if (err) {
@@ -156,17 +196,29 @@ app.get('/getCartItems', (req, res) => {
   res.json(cartItems);
 });
 
+app.post('/saveContactDetails', function(req, res) {
+  const { message } = req.body;
+  const idusers = req.session.userId;
 
-app.get('/cart', function(req, res) {
-  // Fetch the cart items from the session or database
-  const cartItems = req.session.cartItems || [];
-
-  res.render("cart.ejs", { cartItems });
+  db.promise()
+    .query('INSERT INTO shop.contact (idusers, message) VALUES (?, ?)', [idusers , message])
+    .then(([result]) => {
+      console.log('Contact details saved successfully');
+    })
+    .catch((error) => {
+      console.log('ERROR:', error);
+    });
 });
 
-// Define the route for "/itemDetails"
-app.get('/itemDetails', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'itemDetails.html'));
+app.get('/getContactData', function(req, res) {
+  db.promise()
+    .query('SELECT message, userName, userEmail FROM shop.contact, shop.users WHERE shop.contact.idusers = shop.users.idusers')
+    .then(([rows]) => {
+      res.json(rows);
+    })
+    .catch((error) => {
+      console.log('ERROR: ', error);
+    });
 });
 
 app.listen(3000, function() {

@@ -89,30 +89,25 @@
     <img src="<!-- Image -->" width="200" height="200" class="right">
     <img src="<!-- Image -->" width="200" height="200" class="right">
 
-    <div class="contactBox">
-      <h2>Contact Us</h2>
-      <form action="submit_form.php" method="POST">
-        <div class="formField">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
+    <% if(isLoggedIn) { %>
 
-        <div class="formField">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-        </div>
+      <div class="contactBox">
+        <h2>Contact Us</h2>
+        <form action="submit_form.php" method="POST">
+          <div class="formField">
+          
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+  
+            <input type="submit" value="Submit" class="submitButton">
+          </div>
+        </form>
+      </div>
 
-        <div class="formField">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-
-        <div class="formField">
-          <input type="submit" value="Submit" class="submitButton">
-        </div>
-      </form>
-    </div>
+    <% } %>
+    
     <%- include('footer'); -%>
+    <script src="/contact.js"></script>
   </main>
 </body>
 </html>

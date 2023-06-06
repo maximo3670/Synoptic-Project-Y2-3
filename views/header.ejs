@@ -130,7 +130,11 @@ nav {
         <li><a href="/">Home</a></li>
         <li><a href="/store">Store</a></li>
         <li><a href="#">Donations</a></li>
-        <li><a href="#">About Us</a></li>        
+        <li><a href="#">About Us</a></li>     
+        <% console.log("userId:", userId); %>
+        <% if (isLoggedIn && userId == 1) { %>
+          <li><a href="/admin">Admin Page</a></li>
+        <% } %>
       </ul>
     </nav>
     <script src="logout.js"></script>
